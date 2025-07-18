@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram UI Clone - Login & Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      width: 360px;
+      background: white;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+    }
+    .box img {
+      width: 180px;
+      margin-bottom: 30px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #dbdbdb;
+      border-radius: 4px;
+      background: #fafafa;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      background: #3897f0;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .toggle {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .toggle a {
+      color: #00376b;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .message {
+      color: green;
+      margin-top: 15px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Logo" />
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <input type="text" id="loginUser" placeholder="Username or Email" required />
+      <input type="password" id="loginPass" placeholder="Password" required />
+      <div style="text-align: right; margin: 5px 0 10px;">
+        <a href="#" onclick="handleForgot()" style="font-size: 12px; color: #00376b; text-decoration: none;">Forgot Password?</a>
+      </div>
+      <button type="submit">Log In</button>
+      <div class="toggle">Don't have an account? <a onclick="switchToSignUp()">Sign up</a></div>
+      <div class="message" id="loginMsg"></div>
+    </form>
+
+    <!-- Sign Up Form -->
+    <form id="signupForm" class="hidden" onsubmit="handleSignUp(event)">
+      <input type="text" id="signupUser" placeholder="Username" required />
+      <input type="email" id="signupEmail" placeholder="Email" required />
+      <input type="password" id="signupPass" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+      <div class="toggle">Already have an account? <a onclick="switchToLogin()">Log in</a></div>
+      <div class="message" id="signupMsg"></div>
+    </form>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+
+    function switchToSignUp() {
+      loginForm.classList.add("hidden");
+      signupForm.classList.remove("hidden");
+    }
+
+    function switchToLogin() {
+      signupForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById("loginUser").value;
+      const pass = document.getElementById("loginPass").value;
+
+      if (user === "admin" && pass === "1234") {
+        document.getElementById("loginMsg").innerText = "Login successful!";
+      } else {
+        document.getElementById("loginMsg").innerText = "Invalid login.";
+        document.getElementById("loginMsg").style.color = "red";
+      }
+    }
+
+    function handleSignUp(event) {
+      event.preventDefault();
+      const user = document.getElementById("signupUser").value;
+      const email = document.getElementById("signupEmail").value;
+      const pass = document.getElementById("signupPass").value;
+
+      document.getElementById("signupMsg").innerText = `Account created for ${user}!`;
+    }
+
+    function handleForgot() {
+      alert("Password reset instructions sent to your email!");
+    }
+  </script>
+
+</body>
+</html>
